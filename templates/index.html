@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Python To-Do</title>
+    <style>
+        .done { text-decoration: line-through; color: gray; }
+        body { font-family: sans-serif; max-width: 500px; margin: 50px auto; }
+    </style>
+</head>
+<body>
+<h2>My Tasks</h2>
+<form action="/add" method="POST">
+    <input type="text" name="todo" placeholder="Add a new task" required>
+    <button type="submit">Add</button>
+</form>
+
+<ul>
+    {% for todo in todos %}
+    <li>
+        <a href="{{ url_for('check', todo_id=todo.id) }}">
+            <span class="{{ 'done' if todo.done else '' }}">{{ todo.task }}</span>
+        </a>
+
+        <a href="{{ url_for('delete', todo_id=todo.id) }}" style="color: red;">[Delete]</a>
+
+    </li>
+    {% endfor %}
+
+
+</ul>
+
+
+</body>
+</html>
